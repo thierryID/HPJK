@@ -3,21 +3,21 @@ import logo from './poudlard.jpg';
 import logo2 from './Harrypotter.jpg';
 import logo3 from './Hermione.jpg';
 import './App.css';
-import axios from 'axios'; 
+import axios from 'axios';
 
 class App extends Component {
 
   state = {
     image: '',
   };
-  
+
 
   componentDidMount() {
     const url = 'https://www.potterapi.com/v1/sortingHat';
     const options = {
       method: 'GET',
     };
-  
+
     return axios(url, options)
       .then(response => {
         console.log("response.data",response.data);
@@ -36,15 +36,14 @@ class App extends Component {
     return axios(url, options)
       .then(response => {
         console.log("response.data",response.data);
-        this.setState({ image: response.data});
-        return response.data;
+        return this.setState({ image: response.data});
       })
       .catch(error => error);
   }
 
 
   render() {
-    console.log(this.state.image);
+    console.log("image",this.state.image);
 
     return (
       <div className="App">
@@ -67,9 +66,9 @@ class App extends Component {
           <p>
             Votre maison : {this.state.image}
           </p>
-          <button class="button" onClick={this.myFunction} >Button</button>
+          <button class="button" onClick={this.myFunction.bind(this)} >Button</button>
           <p>
-            Harry potter la légende 
+            Harry potter la légende
           </p>
           <a
             className="App-link"
